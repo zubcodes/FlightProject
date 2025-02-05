@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Flight Search</title>
+</head>
+<body>
+<h1>Search for Flights</h1>
+<form action="/search" method="get">
+    <label for="airline">Airline Name:</label> <input type="text" id="airline" name="airline">
+    <button type="submit">Search</button>
+</form>
+
+<h2>Flight Results:</h2>
+
+<table>
+    <thead>
+    <tr>
+        <th>Flight Date</th>
+        <th>Status</th>
+        <th>Departure Airport</th>
+        <th>Arrival Airport</th>
+        <th>Flight Number</th>
+        <th>Departure Time</th>
+        <th>Arrival Time</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="flight : ${flights}">
+        <td th:text="${flight.flight_date}"></td>
+        <td th:text="${flight.flight_status}"></td>
+        <td th:text="${flight.departure.airport}"></td>
+        <td th:text="${flight.arrival.airport}"></td>
+        <td ><a th:href="@{'/flight/details?iata=' + ${flight.flight.iata}}" th:text="${flight.flight.iata}"></a></td>
+        <td th:text="${flight.departure.scheduled}"></td>
+        <td th:text="${flight.arrival.scheduled}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
