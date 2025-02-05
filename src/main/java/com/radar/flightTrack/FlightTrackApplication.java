@@ -3,10 +3,8 @@ package com.radar.flightTrack;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,14 +22,17 @@ public class FlightTrackApplication {
 	}
 	/*@Bean
 	CommandLineRunner loadData(FlightService flightCall) {
-		return args -> flightCall.someRestCall("");
+		return args -> flightCall.getFlights("");
 	}*/
+
 
 	public FlightService flightService;
 
 	public FlightTrackApplication(FlightService flightService){
 		this.flightService = flightService;
 	}
+
+
 
 	@GetMapping("/")
 	public String home() {
@@ -40,9 +41,16 @@ public class FlightTrackApplication {
 
 	@GetMapping("/search")
 	public String searchAirline(@RequestParam String airline, Model model) throws JsonProcessingException {
-		List<Map<String, Object>> flights = flightService.someRestCall(airline);
+		List<Flight> flights = flightService.getFlights(airline);
 		model.addAttribute("flights", flights);
 		return "index";
+	}
+
+	@GetMapping("/flight/details")
+	public String flightDetails(@RequestParam String iata, Model model) throws JsonProcessingException {
+		List<Map<String, Object>> details = flightService.anotherRestCall(iata);
+		model.addAttribute("details", details);
+		return "flight";
 	}
 
 
