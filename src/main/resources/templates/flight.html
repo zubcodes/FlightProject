@@ -5,7 +5,7 @@
     <title>Title</title>
 </head>
 <body>
-<h1 th:each="detail : ${details}" th:text="'Flight ' + ${detail.flight.iata}"></h1>
+<h1 th:text="'Flight ' + ${detail.flight.iata}"></h1>
 
 <table>
     <thead>
