@@ -33,7 +33,8 @@
         <td th:text="${flight.flight_status}"></td>
         <td th:text="${flight.departure.airport}"></td>
         <td th:text="${flight.arrival.airport}"></td>
-        <td ><a th:href="@{'/flight/details?iata=' + ${flight.flight.iata}}" th:text="${flight.flight.iata}"></a></td>
+        <td ><a th:href="@{'/flight/details?iata=' + ${flight.flight.iata}+'&airline='+${flight.airline.lowerCaseName}}"
+                th:text="${flight.flight.iata}"></a></td>
         <td th:text="${flight.departure.scheduled}"></td>
         <td th:text="${flight.arrival.scheduled}"></td>
     </tr>

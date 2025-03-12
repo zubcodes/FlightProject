@@ -4,49 +4,36 @@
     <meta charset="UTF-8" />
     <title>Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <style>
-        @import "node_modules/ol/ol.css";
-      </style>
-      <style>
-        html, body, #map-container {
-          margin: 0;
-          height: 100%;
-          width: 100%;
-          font-family: sans-serif;
-          margin-top: 20px;
-        }
-      </style>
+    <script type="module" src="../main.js"></script>
+
 </head>
 <body>
-    <div th:each="detail : ${details}">
-        <h1 th:text="'Flight ' + ${detail.flight.iata}"></h1>
+    <div th:each="flight : ${flight}">
+        <h1 th:text="'Flight ' + ${flight.flight.iata}"></h1>
     </div>
 <table>
     <thead>
-    <tr>
-        <th>Flight Date</th>
-        <th>Status</th>
-        <th>Departure Airport</th>
-        <th>Arrival Airport</th>
-        <th>Departure Time</th>
-        <th>Arrival Time</th>
-    </tr>
+        <tr>
+            <th>Flight Date</th>
+            <th>Status</th>
+            <th>Departure Airport</th>
+            <th>Arrival Airport</th>
+            <th>Departure Time</th>
+            <th>Arrival Time</th>
+        </tr>
     </thead>
     <tbody>
-    <tr th:each="detail : ${details}">
-        <td th:text="${detail.flight_date}"></td>
-        <td th:text="${detail.flight_status}"></td>
-        <td th:text="${detail.departure.airport}"></td>
-        <td th:text="${detail.arrival.airport}"></td>
-        <td th:text="${detail.departure.scheduled}"></td>
-        <td th:text="${detail.arrival.scheduled}"></td>
-    </tr>
+        <tr th:each="flight : ${flight}">
+            <td th:text="${flight.flight_date}"></td>
+            <td th:text="${flight.flight_status}"></td>
+            <td th:text="${flight.departure.airport}"></td>
+            <td th:text="${flight.arrival.airport}"></td>
+            <td th:text="${flight.departure.scheduled}"></td>
+            <td th:text="${flight.arrival.scheduled}"></td>
+        </tr>
     </tbody>
 </table>
 <div id="map-container"></div>
-<script type="module" src="../main.js"></script>
-   
-
 
 
 </body>

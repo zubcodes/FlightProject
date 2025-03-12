@@ -2,6 +2,13 @@ import './style.css';
 import {Map, View} from 'ol';
 import TileLayer from 'ol/layer/Tile';
 import OSM from 'ol/source/OSM';
+import Point from 'ol/geom/Point';
+import {fromLonLat} from 'ol/proj';
+import Feature from 'ol/Feature.js';
+import Polygon from 'ol/geom/Polygon.js';
+
+
+const heathrowCoords = [-0.454, 51.470];
 
 const map = new Map({
   target: 'map-container',
@@ -11,10 +18,10 @@ const map = new Map({
     })
   ],
   view: new View({
-    center: [0, 0],
-    zoom: 2
+    center: fromLonLat(heathrowCoords),
+    zoom: 7
   })
 
-  
+
 
 })

@@ -14,4 +14,8 @@ public class Airline {
     public void setName(String name){
         this.name=name;
     }
+
+    public String getLowerCaseName() {
+        return name != null ? name.toLowerCase() : null;
+    }
 }

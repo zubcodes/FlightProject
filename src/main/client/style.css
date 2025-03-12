@@ -4,9 +4,11 @@ html, body {
   margin: 0;
   height: 100%;
 }
-#map {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 100%;
+#map-container {
+  position: relative;  /* No absolute positioning */
+  width: 80%;          /* Adjust width as needed */
+  height: 400px;       /* Reduce height */
+  max-width: 800px;    /* Optional: Set max width */
+  margin: 50px auto;   /* Centers horizontally and moves down */
+  border: 2px solid black; /* Just to visualize boundaries */
 }

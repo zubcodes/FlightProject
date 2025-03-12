@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
-import java.util.Map;
 
 @SpringBootApplication
 @Controller
@@ -52,14 +51,16 @@ public class FlightTrackApplication {
 		return "index";
 	}
 
+
 	@GetMapping("/flight/details")
-	public String flightDetails(@RequestParam String iata, Model model) throws JsonProcessingException {
-		List<Map<String, Object>> details = flightService.anotherRestCall(iata);
-		model.addAttribute("details", details);
+	public String flightDetails(@RequestParam String iata, @RequestParam String airline, Model model) {
+		Flight flight = flightService.getCachedFlight(iata, airline);
+		if (flight == null) {
+			return "error"; // Or handle the case where flight isn't found
+		}
+		model.addAttribute("flight", flight);
 		return "flight";
 	}
-
-
 
 
 }
