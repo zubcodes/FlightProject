@@ -1,27 +1,78 @@
 import './style.css';
-import {Map, View} from 'ol';
+import { Map, View } from 'ol';
 import TileLayer from 'ol/layer/Tile';
 import OSM from 'ol/source/OSM';
-import Point from 'ol/geom/Point';
-import {fromLonLat} from 'ol/proj';
-import Feature from 'ol/Feature.js';
-import Polygon from 'ol/geom/Polygon.js';
+import { fromLonLat } from 'ol/proj';
+import Feature from 'ol/Feature';
+import VectorLayer from 'ol/layer/Vector';
+import VectorSource from 'ol/source/Vector';
+import { LineString } from 'ol/geom';
+import Stroke from 'ol/style/Stroke';
+import Style from 'ol/style/Style';
 
+// Get flight IATA & airline from URL parameters
+const urlParams = new URLSearchParams(window.location.search);
+const iata = urlParams.get('iata');
+const airline = urlParams.get('airline');
 
-const heathrowCoords = [-0.454, 51.470];
+// Function to fetch flight data from backend
+async function fetchFlightData() {
+    try {
+        const response = await fetch(`/flight/details?iata=${iata}&airline=${airline}`);
+        if (!response.ok) throw new Error('Network response was not ok');
 
-const map = new Map({
-  target: 'map-container',
-  layers: [
-    new TileLayer({
-      source: new OSM()
-    })
-  ],
-  view: new View({
-    center: fromLonLat(heathrowCoords),
-    zoom: 7
-  })
+        const flightData = await response.json();
+        drawFlightPath(flightData);
+    } catch (error) {
+        console.error("Error fetching flight data:", error);
+    }
+}
 
+// Function to draw flight path on the map
+function drawFlightPath(flightData) {
+    const departureCoords = fromLonLat([flightData.departure.lon, flightData.departure.lat]);
+    const arrivalCoords = fromLonLat([flightData.arrival.lon, flightData.arrival.lat]);
 
+    // Function to create a curved arc
+    function createArc(coords1, coords2) {
+        const midPoint = [
+            (coords1[0] + coords2[0]) / 2,
+            (coords1[1] + coords2[1]) / 2 + 0.5
+        ];
+        return new LineString([coords1, midPoint, coords2]);
+    }
 
-})
+    // Create and style the flight path
+    const flightArc = createArc(departureCoords, arrivalCoords);
+    const flightFeature = new Feature(flightArc);
+    flightFeature.setStyle(new Style({
+        stroke: new Stroke({
+            color: 'red',
+            width: 2,
+            lineDash: [5, 5]
+        })
+    }));
+
+    // Vector layer for the flight arc
+    const flightLayer = new VectorLayer({
+        source: new VectorSource({
+            features: [flightFeature]
+        })
+    });
+
+    // Initialize map with flight path
+    const Map = new Map({
+        target: 'map-container',
+        layers: [
+            new TileLayer({ source: new OSM() }),
+            flightLayer
+        ],
+        view: new View({
+            center: departureCoords,
+            zoom: 3
+        })
+    });
+}
+
+// Fetch data and draw the flight path
+fetchFlightData();
