@@ -1,0 +1,53 @@
+{ "data" : [ { "flight_date": "2025-02-04",
+  "flight_status": "scheduled",
+  "departure": {
+    "airport": "Dublin International",
+    "timezone": "Europe/Dublin",
+    "iata": "DUB",
+    "icao": "EIDW",
+    "terminal": "2",
+    "gate": "409",
+    "delay": null,
+    "scheduled": "2025-02-04T07:40:00+00:00",
+    "estimated": "2025-02-04T07:40:00+00:00",
+    "actual": null,
+    "estimated_runway": null,
+    "actual_runway": null
+  },
+  "arrival": {
+    "airport": "Heathrow",
+    "timezone": "Europe/London",
+    "iata": "LHR",
+    "icao": "EGLL",
+    "terminal": "2",
+    "gate": null,
+    "baggage": null,
+    "delay": null,
+    "scheduled": "2025-02-04T09:05:00+00:00",
+    "estimated": "2025-02-04T09:05:00+00:00",
+    "actual": null,
+    "estimated_runway": null,
+    "actual_runway": null
+  },
+  "airline": {
+    "name": "British Airways",
+    "iata": "BA",
+    "icao": "BAW"
+  },
+  "flight": {
+    "number": "5954",
+    "iata": "BA5954",
+    "icao": "BAW5954",
+    "codeshared": {
+      "airline_name": "aer lingus",
+      "airline_iata": "ei",
+      "airline_icao": "ein",
+      "flight_number": "154",
+      "flight_iata": "ei154",
+      "flight_icao": "ein154"
+    }
+  },
+  "aircraft": null,
+  "live": null
+}
+]}
