@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8" />
     <title>Title</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
 
   <script type="module" crossorigin src="/static/main-Gv_gLQN3.js"></script>
   <link rel="stylesheet" crossorigin href="/static/main-DaaNSwsK.css">
@@ -21,6 +22,8 @@
             <th>Arrival Airport</th>
             <th>Departure Time</th>
             <th>Arrival Time</th>
+            <th>ICAO code departure airport</th>
+            <th>ICAO code arrival airport</th>
         </tr>
     </thead>
     <tbody>
@@ -31,6 +34,8 @@
             <td th:text="${flight.arrival.airport}"></td>
             <td th:text="${flight.departure.scheduled}"></td>
             <td th:text="${flight.arrival.scheduled}"></td>
+            <td th:text="${flight.departure.icao}"></td>
+            <td th:text="${flight.arrival.icao}"></td>
         </tr>
     </tbody>
 </table>

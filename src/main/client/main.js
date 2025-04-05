@@ -15,13 +15,22 @@ const urlParams = new URLSearchParams(window.location.search);
 const iata = urlParams.get('iata');
 const airline = urlParams.get('airline');
 
+
+const lookupCSV = require('lookup-csv');
+
+// Create a lookup table using lookup column name to use from the csv data
+const lookupTable = lookupCSV('./airports.csv', 'ident')
+
+// Get rows matching lookup value
+
+
 // Function to fetch flight data from backend
 async function fetchFlightData() {
     try {
         const response = await fetch(`/flight/details?iata=${iata}&airline=${airline}`);
         if (!response.ok) throw new Error('Network response was not ok');
 
-        const flightData = await response.json();
+        const flightData = await response.text();
         drawFlightPath(flightData);
     } catch (error) {
         console.error("Error fetching flight data:", error);
@@ -76,3 +85,14 @@ function drawFlightPath(flightData) {
 
 // Fetch data and draw the flight path
 fetchFlightData();
+
+matchingRows = lookupTable.get(flightData.departure.airport)
+console.log(matchingRows)
+// {
+//     animal: 'cow',
+//     type: 'mammal',
+//     sound: {
+//          type: 'moo-moo',
+//          pitch: 'low'
+//     }
+// }
