@@ -30,9 +30,13 @@
             <td th:text="${flight.arrival.airport}"></td>
             <td th:text="${flight.departure.scheduled}"></td>
             <td th:text="${flight.arrival.scheduled}"></td>
+            <td id="departure_icao" th:text="${flight.departure.icao}"></td>
+            <td id="arrival_icao" th:text="${flight.arrival.icao}"></td>
         </tr>
     </tbody>
 </table>
+Depature Airport Data : <b id ="dep_air_data"></b>
+Arrival Airport Data: <b id="arr_air_data"></b> 
 <div id="map-container"></div>
 
 

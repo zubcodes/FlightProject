@@ -15,26 +15,21 @@ const urlParams = new URLSearchParams(window.location.search);
 const iata = urlParams.get('iata');
 const airline = urlParams.get('airline');
 
-
+// https://github.com/planemad/lookup-csv
 const lookupCSV = require('lookup-csv');
 
 // Create a lookup table using lookup column name to use from the csv data
 const lookupTable = lookupCSV('./airports.csv', 'ident')
 
-// Get rows matching lookup value
-
-
-// Function to fetch flight data from backend
+// Function to fetch flight data 
 async function fetchFlightData() {
-    try {
-        const response = await fetch(`/flight/details?iata=${iata}&airline=${airline}`);
-        if (!response.ok) throw new Error('Network response was not ok');
-
-        const flightData = await response.text();
-        drawFlightPath(flightData);
-    } catch (error) {
-        console.error("Error fetching flight data:", error);
-    }
+  var depIcao = document.getElementById('departure_icao').innerText;
+  var arrIcao = document.getElementById('arrival_icao').innerText;
+  // Get rows matching lookup value
+  matchingRowsDepAirport = lookupTable.get(depIcao);
+  matchingRowsArrAirport = lookupTable.get(arrIcao);
+  document.getElementById("dep_air_data").innerHTML = matchingRowsDepAirport;
+  document.getElementById("arr_air_data").innerHTML = matchingRowsArrAirport;
 }
 
 // Function to draw flight path on the map
@@ -86,13 +81,3 @@ function drawFlightPath(flightData) {
 // Fetch data and draw the flight path
 fetchFlightData();
 
-matchingRows = lookupTable.get(flightData.departure.airport)
-console.log(matchingRows)
-// {
-//     animal: 'cow',
-//     type: 'mammal',
-//     sound: {
-//          type: 'moo-moo',
-//          pitch: 'low'
-//     }
-// }
