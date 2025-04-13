@@ -15,22 +15,30 @@ const urlParams = new URLSearchParams(window.location.search);
 const iata = urlParams.get('iata');
 const airline = urlParams.get('airline');
 
-// https://github.com/planemad/lookup-csv
-const lookupCSV = require('lookup-csv');
-
-// Create a lookup table using lookup column name to use from the csv data
-const lookupTable = lookupCSV('./airports.csv', 'ident')
-
-// Function to fetch flight data 
-async function fetchFlightData() {
-  var depIcao = document.getElementById('departure_icao').innerText;
-  var arrIcao = document.getElementById('arrival_icao').innerText;
-  // Get rows matching lookup value
-  matchingRowsDepAirport = lookupTable.get(depIcao);
-  matchingRowsArrAirport = lookupTable.get(arrIcao);
-  document.getElementById("dep_air_data").innerHTML = matchingRowsDepAirport;
-  document.getElementById("arr_air_data").innerHTML = matchingRowsArrAirport;
-}
+window.addEventListener('DOMContentLoaded', async () => {
+    const depIcao = document.getElementById('departure_icao').innerText.trim();
+    const arrIcao = document.getElementById('arrival_icao').innerText.trim();
+  
+    Papa.parse('/static/airports.csv', {
+    download: true,
+      header: true,
+      complete: function(results) {
+        const rows = results.data;
+  
+        const depRow = rows.find(row => row.ident === depIcao);
+        const arrRow = rows.find(row => row.ident === arrIcao);
+  
+        document.getElementById("dep_air_data").innerText = depRow
+          ? `${depRow.name}, lat: ${depRow.latitude_deg}, lon: ${depRow.longitude_deg}`
+          : "Departure airport not found";
+  
+        document.getElementById("arr_air_data").innerText = arrRow
+          ? `${arrRow.name}, lat: ${arrRow.latitude_deg}, lon: ${arrRow.longitude_deg}`
+          : "Arrival airport not found";
+      }
+    });
+  });
+  
 
 // Function to draw flight path on the map
 function drawFlightPath(flightData) {
@@ -77,7 +85,4 @@ function drawFlightPath(flightData) {
         })
     });
 }
-
-// Fetch data and draw the flight path
-fetchFlightData();
 
