@@ -31,3 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
+/src/main/resources/static/*.js
+/src/main/resources/static/*.css
+/src/main/resources/templates/flight.html

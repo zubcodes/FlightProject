@@ -8,6 +8,7 @@ public class Departure {
     String airport;
     String timezone;
     String iata;
+    String icao;
     String terminal;
     String gate;
     String scheduled;
@@ -30,7 +31,7 @@ public class Departure {
         return iata;
     }
 
-    public void setIcao(String iata){
+    public void setIata(String iata){
         this.iata=iata;
     }
 
@@ -58,4 +59,11 @@ public class Departure {
         this.scheduled=scheduled;
     }
 
+    public String getIcao(){
+        return icao;
+    }
+
+    public void setIcao(String icao){
+        this.icao=icao;
+    }
 }

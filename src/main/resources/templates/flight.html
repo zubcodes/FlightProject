@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8" />
     <title>Title</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 
-  <script type="module" crossorigin src="/static/main-C2QulALv.js"></script>
+  <script type="module" crossorigin src="/static/main-DpceCjIl.js"></script>
   <link rel="stylesheet" crossorigin href="/static/main-DaaNSwsK.css">
 </head>
 <body>
@@ -31,9 +32,13 @@
             <td th:text="${flight.arrival.airport}"></td>
             <td th:text="${flight.departure.scheduled}"></td>
             <td th:text="${flight.arrival.scheduled}"></td>
+            <td id="departure_icao" th:text="${flight.departure.icao}"></td>
+            <td id="arrival_icao" th:text="${flight.arrival.icao}"></td>
         </tr>
     </tbody>
 </table>
+Depature Airport Data : <b id ="dep_air_data"></b>
+Arrival Airport Data: <b id="arr_air_data"></b> 
 <div id="map-container"></div>
 
 

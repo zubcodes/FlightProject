@@ -12,6 +12,7 @@ public class Arrival {
     String terminal;
     String gate;
     String scheduled;
+    String icao;
 
     public String getAirport(){
         return airport;
@@ -58,6 +59,12 @@ public class Arrival {
         this.scheduled=scheduled;
     }
 
+    public String getIcao(){
+        return icao;
+    }
+    public void setIcao(String icao){
+        this.icao = icao;
+    }
 
 
 }
