@@ -11,6 +11,7 @@
     "vite-plugin-static-copy": "^2.3.0"
   },
   "dependencies": {
+    "my-app": "file:",
     "ol": "latest"
   }
 }

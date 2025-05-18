@@ -28,12 +28,10 @@ window.addEventListener('DOMContentLoaded', async () => {
         const depRow = rows.find(row => row.ident === depIcao);
         const arrRow = rows.find(row => row.ident === arrIcao);
   
-        document.getElementById("dep_air_data").innerText = depRow
-          ? `${depRow.name}, lat: ${depRow.latitude_deg}, lon: ${depRow.longitude_deg}`
+        document.getElementById("dep_air_data").innerText = depRow ? `${depRow.name}, lat: ${depRow.latitude_deg}, lon: ${depRow.longitude_deg}`
           : "Departure airport not found";
   
-        document.getElementById("arr_air_data").innerText = arrRow
-          ? `${arrRow.name}, lat: ${arrRow.latitude_deg}, lon: ${arrRow.longitude_deg}`
+        document.getElementById("arr_air_data").innerText = arrRow ? `${arrRow.name}, lat: ${arrRow.latitude_deg}, lon: ${arrRow.longitude_deg}`
           : "Arrival airport not found";
       }
     });
@@ -42,8 +40,8 @@ window.addEventListener('DOMContentLoaded', async () => {
 
 // Function to draw flight path on the map
 function drawFlightPath(flightData) {
-    const departureCoords = fromLonLat([flightData.departure.lon, flightData.departure.lat]);
-    const arrivalCoords = fromLonLat([flightData.arrival.lon, flightData.arrival.lat]);
+    const departureCoords = fromLonLat([depRow.latitude_deg, depRow.longitude_deg]);
+    const arrivalCoords = fromLonLat([arrRow.latitude_deg, arrRow.longitude_deg]);
 
     // Function to create a curved arc
     function createArc(coords1, coords2) {
