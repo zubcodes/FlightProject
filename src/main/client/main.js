@@ -33,15 +33,19 @@ window.addEventListener('DOMContentLoaded', async () => {
   
         document.getElementById("arr_air_data").innerText = arrRow ? `${arrRow.name}, lat: ${arrRow.latitude_deg}, lon: ${arrRow.longitude_deg}`
           : "Arrival airport not found";
+
+        if (depRow && arrRow) {
+            drawFlightPath(depRow, arrRow);
+        }
       }
     });
   });
   
 
 // Function to draw flight path on the map
-function drawFlightPath(flightData) {
-    const departureCoords = fromLonLat([depRow.latitude_deg, depRow.longitude_deg]);
-    const arrivalCoords = fromLonLat([arrRow.latitude_deg, arrRow.longitude_deg]);
+function drawFlightPath(depRow, arrRow) {
+    const departureCoords = fromLonLat([parseFloat(depRow.longitude_deg), parseFloat(depRow.latitude_deg)]);
+    const arrivalCoords = fromLonLat([parseFloat(arrRow.longitude_deg), parseFloat(arrRow.latitude_deg)]);
 
     // Function to create a curved arc
     function createArc(coords1, coords2) {
@@ -71,7 +75,7 @@ function drawFlightPath(flightData) {
     });
 
     // Initialize map with flight path
-    const Map = new Map({
+    const map = new Map({
         target: 'map-container',
         layers: [
             new TileLayer({ source: new OSM() }),
