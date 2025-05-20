@@ -34,3 +34,5 @@ build/
 /src/main/resources/static/*.js
 /src/main/resources/static/*.css
 /src/main/resources/templates/flight.html
+src/main/resources/static/main-DaaNSwsK.css
+src/main/resources/templates/flight.html
